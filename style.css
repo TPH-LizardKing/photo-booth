@@ -1,0 +1,95 @@
+body {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+
+#camera-container {
+    position: relative;
+    width: 640px;
+    height: 480px;
+    border: 5px solid #333;
+    margin-bottom: 10px;
+}
+
+#camera-stream {
+    width: 100%;
+    height: 100%;
+}
+
+#timer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 100px;
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+#start-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+#photo-strip {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: white;
+    border: 2px solid #333;
+    width: 640px;
+}
+
+/* For temporary thumbnails during capture */
+#photo-strip > img {
+    width: 150px;
+    height: 112px;
+}
+
+.photo-download {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.photo-download img {
+    width: 160px;
+    height: 120px;
+    margin-bottom: 10px;
+}
+
+.photo-download a {
+    text-decoration: none;
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.photo-download.main-card {
+    width: 100%;
+    background-color: #e8f4ff;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.photo-download.main-card img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 0;
+}
+
+.photo-download.main-card a {
+    background-color: #007bff;
+}
