@@ -9,6 +9,7 @@ const totalPictures = 4;
 let countdownInterval;
 const capturedImages = [];
 
+// Requests access to the user's camera and starts the video stream
 async function startCamera() {
     try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -19,6 +20,7 @@ async function startCamera() {
     }
 }
 
+// Resets the photo booth state and begins the first countdown
 function startPhotoBooth() {
     startButton.disabled = true;
     picturesTaken = 0;
@@ -27,6 +29,7 @@ function startPhotoBooth() {
     startCountdown();
 }
 
+// Handles the 3-second countdown before a picture is taken
 function startCountdown() {
     let count = 3;
     timerDisplay.textContent = count;
@@ -41,6 +44,7 @@ function startCountdown() {
     }, 1000);
 }
 
+// Captures a frame from the video stream and stores it as a JPEG
 function takePicture() {
     canvas.width = cameraStream.videoWidth;
     canvas.height = cameraStream.videoHeight;
@@ -69,11 +73,13 @@ function takePicture() {
     }
 }
 
+// Clears the preview thumbnails and triggers the final strip generation
 function createDownloads() {
     photoStrip.innerHTML = ''; // Clear thumbnails
     generatePhotoCard();
 }
 
+// Combines all 4 captured images into a single vertical strip with a white background and gaps
 function generatePhotoCard() {
     const cardCanvas = document.createElement('canvas');
     const cardCtx = cardCanvas.getContext('2d');
