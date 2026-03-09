@@ -38,58 +38,49 @@ body {
 
 #photo-strip {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    padding: 10px;
-    background-color: white;
-    border: 2px solid #333;
-    width: 640px;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background-color: #ddd; /* Darker background to make the white strip pop */
+    border-radius: 8px;
+    margin-top: 20px;
+    width: fit-content;
+    min-width: 300px;
 }
 
 /* For temporary thumbnails during capture */
 #photo-strip > img {
     width: 150px;
-    height: 112px;
+    height: auto;
+    border: 2px solid #fff;
 }
 
-.photo-download {
+.final-strip-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid #ccc;
-    padding: 10px;
-    background-color: #f9f9f9;
+    gap: 20px;
 }
 
-.photo-download img {
-    width: 160px;
-    height: 120px;
-    margin-bottom: 10px;
-}
-
-.photo-download a {
-    text-decoration: none;
-    background-color: #4CAF50;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
-.photo-download.main-card {
-    width: 100%;
-    background-color: #e8f4ff;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-.photo-download.main-card img {
-    width: 150px;
+.final-strip-image {
+    max-width: 300px; /* Scaled down for preview */
     height: auto;
-    margin-bottom: 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    border: 1px solid #ccc;
 }
 
-.photo-download.main-card a {
+.download-button {
+    text-decoration: none;
     background-color: #007bff;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.2s;
+}
+
+.download-button:hover {
+    background-color: #0056b3;
 }

@@ -71,38 +71,25 @@ function takePicture() {
 
 function createDownloads() {
     photoStrip.innerHTML = ''; // Clear thumbnails
-
-    // Create download for the combined photo card
     generatePhotoCard();
-
-    // Create downloads for individual pictures
-    capturedImages.forEach((dataUrl, index) => {
-        const photoContainer = document.createElement('div');
-        photoContainer.className = 'photo-download';
-
-        const img = document.createElement('img');
-        img.src = dataUrl;
-
-        const downloadLink = document.createElement('a');
-        downloadLink.href = dataUrl;
-        downloadLink.download = `photo_${index + 1}.jpg`;
-        downloadLink.textContent = `Download Photo ${index + 1}`;
-
-        photoContainer.appendChild(img);
-        photoContainer.appendChild(downloadLink);
-        photoStrip.appendChild(photoContainer);
-    });
 }
 
 function generatePhotoCard() {
     const cardCanvas = document.createElement('canvas');
     const cardCtx = cardCanvas.getContext('2d');
     
-    const singleWidth = cameraStream.videoWidth;
-    const singleHeight = cameraStream.videoHeight;
+    const imgWidth = cameraStream.videoWidth;
+    const imgHeight = cameraStream.videoHeight;
 
-    cardCanvas.width = singleWidth;
-    cardCanvas.height = singleHeight * totalPictures;
+    const padding = 40;
+    const gap = 20;
+
+    cardCanvas.width = imgWidth + (padding * 2);
+    cardCanvas.height = (imgHeight * totalPictures) + (gap * (totalPictures - 1)) + (padding * 2);
+
+    // Fill with white background
+    cardCtx.fillStyle = '#ffffff';
+    cardCtx.fillRect(0, 0, cardCanvas.width, cardCanvas.height);
 
     const imagePromises = capturedImages.map(dataUrl => {
         return new Promise(resolve => {
@@ -114,28 +101,30 @@ function generatePhotoCard() {
 
     Promise.all(imagePromises).then(images => {
         images.forEach((img, index) => {
-            cardCtx.drawImage(img, 0, index * singleHeight, singleWidth, singleHeight);
+            const x = padding;
+            const y = padding + (index * (imgHeight + gap));
+            cardCtx.drawImage(img, x, y, imgWidth, imgHeight);
         });
 
-        const cardDataUrl = cardCanvas.toDataURL('image/jpeg');
+        const stripDataUrl = cardCanvas.toDataURL('image/jpeg', 0.95);
         
-        const photoContainer = document.createElement('div');
-        photoContainer.className = 'photo-download main-card';
+        const container = document.createElement('div');
+        container.className = 'final-strip-container';
 
         const img = document.createElement('img');
-        img.src = cardDataUrl;
-        img.style.width = '100%'; // Make preview smaller
+        img.src = stripDataUrl;
+        img.className = 'final-strip-image';
 
         const downloadLink = document.createElement('a');
-        downloadLink.href = cardDataUrl;
-        downloadLink.download = 'photocard.jpg';
-        downloadLink.textContent = 'Download Photo Card';
+        downloadLink.href = stripDataUrl;
+        downloadLink.download = 'photo-booth-strip.jpg';
+        downloadLink.className = 'download-button';
+        downloadLink.textContent = 'Download Photo Strip';
+
+        container.appendChild(downloadLink);
+        container.appendChild(img);
         
-        photoContainer.appendChild(downloadLink);
-        photoContainer.appendChild(img);
-        
-        // Add the main photo card to the top of the photo strip
-        photoStrip.prepend(photoContainer);
+        photoStrip.appendChild(container);
     });
 }
 
