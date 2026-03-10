@@ -4,22 +4,34 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f0f0f0;
+    background-color: #E8F5BD; /* Background */
+    color: #000000;            /* Text */
+    margin: 0;
+    padding: 20px;
 }
 
-/* Container for the live video stream with a defined border */
+/* Page Title */
+h1 {
+    margin-bottom: 20px;
+}
+
+/* Container for the live video stream with a defined primary color border */
 #camera-container {
     position: relative;
     width: 640px;
     height: 480px;
-    border: 5px solid #333;
-    margin-bottom: 10px;
+    border: 8px solid #84B179; /* Primary */
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    background-color: #000;
 }
 
 /* Ensures the video stream fills its container */
 #camera-stream {
     width: 100%;
     height: 100%;
+    object-fit: cover;
 }
 
 /* Styles the countdown timer overlay in the center of the camera view */
@@ -28,38 +40,59 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 100px;
-    color: white;
-    text-shadow: 2px 2px 4px #000000;
+    font-size: 120px;
+    color: #ffffff;
+    text-shadow: 4px 4px 10px rgba(0,0,0,0.5);
+    margin: 0;
 }
 
-/* Styles the start button for clear visibility and interactivity */
+/* Styles the start button using the primary and secondary colors */
 #start-button {
-    padding: 10px 20px;
-    font-size: 18px;
+    padding: 15px 40px;
+    font-size: 20px;
+    font-weight: bold;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    background-color: #84B179; /* Primary */
+    color: #000000;            /* Text */
+    border: 3px solid #A2CB8B; /* Secondary */
+    border-radius: 50px;
+    transition: all 0.3s ease;
 }
 
-/* Container for the photo strip and thumbnails, using a gray background to contrast the white strip */
+/* Hover effect for the start button */
+#start-button:hover:not(:disabled) {
+    background-color: #A2CB8B; /* Secondary */
+    transform: scale(1.05);
+}
+
+#start-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Container for the photo strip and thumbnails, using the secondary color */
 #photo-strip {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
-    padding: 20px;
-    background-color: #ddd;
-    border-radius: 8px;
+    gap: 20px;
+    padding: 30px;
+    background-color: #A2CB8B; /* Secondary */
+    border: 4px solid #C7EABB; /* Accent */
+    border-radius: 15px;
     margin-top: 20px;
     width: fit-content;
-    min-width: 300px;
+    min-width: 340px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
-/* Styles the temporary thumbnails that appear during the capture sequence */
+/* Styles the temporary thumbnails with the accent color border */
 #photo-strip > img {
-    width: 150px;
+    width: 200px;
     height: auto;
-    border: 2px solid #fff;
+    border: 4px solid #C7EABB; /* Accent */
+    border-radius: 4px;
 }
 
 /* Layout for the final composite photo strip and its download button */
@@ -67,30 +100,32 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 25px;
 }
 
-/* Scales the final photo strip for preview and adds a subtle shadow for depth */
+/* Scales the final photo strip and adds a shadow for depth */
 .final-strip-image {
     max-width: 300px;
     height: auto;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    border: 1px solid #ccc;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    border: 1px solid #C7EABB; /* Accent */
 }
 
-/* Styles the download button with a blue background and hover effect */
+/* Styles the download button to match the theme */
 .download-button {
     text-decoration: none;
-    background-color: #007bff;
-    color: white;
-    padding: 12px 24px;
-    border-radius: 5px;
+    background-color: #84B179; /* Primary */
+    color: #000000;            /* Text */
+    padding: 14px 28px;
+    border-radius: 8px;
     font-weight: bold;
-    font-size: 16px;
-    transition: background-color 0.2s;
+    font-size: 18px;
+    border: 2px solid #C7EABB; /* Accent */
+    transition: all 0.3s ease;
 }
 
-/* Darkens the download button color when hovered for visual feedback */
+/* Hover effect for the download button */
 .download-button:hover {
-    background-color: #0056b3;
+    background-color: #A2CB8B; /* Secondary */
+    transform: translateY(-2px);
 }
