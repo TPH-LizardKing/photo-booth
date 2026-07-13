@@ -9,10 +9,20 @@ const totalPictures = 4;
 let countdownInterval;
 const capturedImages = [];
 
+let cameraReady = false;
+
 async function startCamera() {
+    startButton.disabled = true;
     try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        const stream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: 'user' }
+        });
         cameraStream.srcObject = stream;
+        await new Promise(resolve => {
+            cameraStream.onloadedmetadata = resolve;
+        });
+        cameraReady = true;
+        startButton.disabled = false;
     } catch (err) {
         console.error("Error accessing camera: ", err);
         alert("Could not access the camera. Please make sure you have a camera connected and have granted permission.");
@@ -20,6 +30,7 @@ async function startCamera() {
 }
 
 function startPhotoBooth() {
+    if (!cameraReady) return;
     startButton.disabled = true;
     picturesTaken = 0;
     capturedImages.length = 0; // Clear the array
