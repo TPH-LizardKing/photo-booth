@@ -2,119 +2,146 @@
     box-sizing: border-box;
 }
 
+/* Sets the overall page layout and background color */
 body {
     font-family: sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f0f0f0;
-    padding: 10px;
+    background-color: #E8F5BD; /* Background */
+    color: #000000;            /* Text */
     margin: 0;
+    padding: 20px;
 }
 
+/* Page Title */
+h1 {
+    margin-bottom: 20px;
+}
+
+/* Container for the live video stream with a defined primary color border */
 #camera-container {
     position: relative;
     width: 100%;
     max-width: 640px;
     aspect-ratio: 4 / 3;
-    border: 5px solid #333;
-    margin-bottom: 10px;
+    border: 8px solid #84B179; /* Primary */
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
     background-color: #000;
 }
 
+/* Ensures the video stream fills its container */
 #camera-stream {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
+/* Styles the countdown timer overlay in the center of the camera view */
 #timer {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: clamp(48px, 15vw, 100px);
-    color: white;
-    text-shadow: 2px 2px 4px #000000;
+    font-size: clamp(48px, 15vw, 120px);
+    color: #ffffff;
+    text-shadow: 4px 4px 10px rgba(0,0,0,0.5);
     margin: 0;
 }
 
+/* Styles the start button using the primary and secondary colors */
 #start-button {
-    padding: 10px 20px;
-    font-size: 18px;
+    padding: 15px 40px;
+    font-size: 20px;
+    font-weight: bold;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    background-color: #84B179; /* Primary */
+    color: #000000;            /* Text */
+    border: 3px solid #A2CB8B; /* Secondary */
+    border-radius: 50px;
+    transition: all 0.3s ease;
 }
 
+/* Hover effect for the start button */
+#start-button:hover:not(:disabled) {
+    background-color: #A2CB8B; /* Secondary */
+    transform: scale(1.05);
+}
+
+#start-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Container for the photo strip and thumbnails, using the secondary color */
 #photo-strip {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    padding: 10px;
-    background-color: white;
-    border: 2px solid #333;
-    width: 100%;
-    max-width: 640px;
-}
-
-/* For temporary thumbnails during capture */
-#photo-strip > img {
-    width: 150px;
-    max-width: 40%;
-    height: auto;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-}
-
-.photo-download {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid #ccc;
-    padding: 10px;
-    background-color: #f9f9f9;
+    gap: 20px;
+    padding: 30px;
+    background-color: #A2CB8B; /* Secondary */
+    border: 4px solid #C7EABB; /* Accent */
+    border-radius: 15px;
+    margin-top: 20px;
+    width: fit-content;
+    max-width: 100%;
+    min-width: 340px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
-.photo-download img {
-    width: 160px;
+/* Styles the temporary thumbnails with the accent color border */
+#photo-strip > img {
+    width: 200px;
     max-width: 100%;
     height: auto;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    margin-bottom: 10px;
-}
-
-.photo-download a {
-    text-decoration: none;
-    background-color: #4CAF50;
-    color: white;
-    padding: 8px 12px;
+    border: 4px solid #C7EABB; /* Accent */
     border-radius: 4px;
-    font-size: 14px;
 }
 
-.photo-download.main-card {
-    width: 100%;
-    background-color: #e8f4ff;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
+/* Layout for the final composite photo strip and its download button */
+.final-strip-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
 }
 
-.photo-download.main-card img {
-    width: 150px;
-    max-width: 100%;
+/* Scales the final photo strip and adds a shadow for depth */
+.final-strip-image {
+    max-width: 300px;
     height: auto;
-    aspect-ratio: unset;
-    margin-bottom: 0;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    border: 1px solid #C7EABB; /* Accent */
 }
 
-.photo-download.main-card a {
-    background-color: #007bff;
+/* Styles the download button to match the theme */
+.download-button {
+    text-decoration: none;
+    background-color: #84B179; /* Primary */
+    color: #000000;            /* Text */
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 18px;
+    border: 2px solid #C7EABB; /* Accent */
+    transition: all 0.3s ease;
+}
+
+/* Hover effect for the download button */
+.download-button:hover {
+    background-color: #A2CB8B; /* Secondary */
+    transform: translateY(-2px);
 }
 
 @media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
     h1 {
         font-size: 24px;
         text-align: center;
@@ -123,5 +150,11 @@ body {
     #start-button {
         width: 100%;
         max-width: 300px;
+    }
+
+    #photo-strip {
+        min-width: 0;
+        width: 100%;
+        padding: 20px;
     }
 }
